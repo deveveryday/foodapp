@@ -5,7 +5,7 @@ import { useCart } from '@/contexts/CartContext'
 import { formatCurrency } from '@/utils/format'
 
 export default function CartPage() {
-  const { items, updateQuantity, removeItem, total, itemCount } = useCart()
+  const { items, updateQuantity, total, itemCount } = useCart()
 
   if (items.length === 0) {
     return (

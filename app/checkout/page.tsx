@@ -60,6 +60,7 @@ export default function CheckoutPage() {
       }
 
       const order = await response.json()
+      debugger
       router.push(`/order-success?id=${order.id}`)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erro inesperado')
