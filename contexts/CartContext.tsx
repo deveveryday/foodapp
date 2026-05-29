@@ -5,7 +5,7 @@ import { CartItem, Product } from '@/types'
 
 interface CartContextType {
   items: CartItem[]
-  addItem: (product: Product, quantity: number) => void
+  addItem: (product: Product) => void
   removeItem: (productId: string) => void
   updateQuantity: (productId: string, quantity: number) => void
   clearCart: () => void
@@ -17,12 +17,14 @@ const CartContext = createContext<CartContextType | null>(null)
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
+  const [array, setArray] = useState([])
 
-  const addItem = (product: Product, quantity: number) => {
-    /*setItems(prev => [...prev, { ...product, quantity: 1 }])*/
-    setItems(prev =>
-      prev.map(item => (item.id === product.id ? { ...item, quantity } : item))
-    )
+  const addItem = (product: Product) => {
+    setItems(prev => [...prev, { ...product, quantity: 10 }])
+    
+    setArray({ ...array, ...product })
+    console.log(array[0])
+    debugger;
   }
 
   const removeItem = (productId: string) => {

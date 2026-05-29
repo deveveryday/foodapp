@@ -30,7 +30,7 @@ function ProductCard({
   onAdd,
 }: {
   product: Product
-  onAdd: (p: Product) => void
+  onAdd: (product: Product) => void
 }) {
   return (
     <div className="product-card">

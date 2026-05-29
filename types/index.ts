@@ -11,6 +11,18 @@ export interface CartItem extends Product {
   quantity: number
 }
 
+export interface CartOrder {
+  id: string
+  items: CartItem[]
+  subtotal: number
+  total: number
+  customerName: string
+  address: string
+  paymentMethod: PaymentMethod
+  status: 'pending' | 'confirmed' | 'cancelled'
+  createdAt: string
+}
+
 export interface Order {
   id: string
   items: CartItem[]

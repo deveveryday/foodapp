@@ -5,7 +5,26 @@ import { useCart } from '@/contexts/CartContext'
 import { formatCurrency } from '@/utils/format'
 
 export default function CartPage() {
-  const { items, updateQuantity, total, itemCount } = useCart()
+  const { items, updateQuantity, removeItem, total, itemCount } = useCart()
+  const a = items
+
+  const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
+    arr.reduce((groups, item) => {
+      (groups[key(item)] ||= []).push(item);
+      return groups;
+    }, {} as Record<K, T[]>);
+
+  const t = groupBy(a, i => i.id)
+
+
+  let grouped = items.reduce(
+    (result: any, currentValue: any) => {
+      (result[currentValue['Section']] = result[currentValue['Section']] || []).push(currentValue);
+      return result;
+    }, {});
+  
+  console.log(grouped)
+
 
   if (items.length === 0) {
     return (
@@ -17,13 +36,14 @@ export default function CartPage() {
       </div>
     )
   }
-
   return (
+
     <>
       <h1 className="page-title">Carrinho ({itemCount} {itemCount === 1 ? 'item' : 'itens'})</h1>
 
       <div className="cart-list">
-        {items.map((item, index) => (
+
+        {a.map((item, index) => (
           <div key={`${item.id}-${index}`} className="cart-item">
             <span className="cart-item-emoji">{item.emoji}</span>
             <div className="cart-item-info">
@@ -45,7 +65,7 @@ export default function CartPage() {
                 +
               </button>
             </div>
-            <span className="cart-item-total">
+            <span className="cart-item-total">z
               {formatCurrency(item.price * item.quantity)}
             </span>
           </div>
